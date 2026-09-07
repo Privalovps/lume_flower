@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="description" content="LUME — букеты из свежих роз с доставкой. Моно- и смешанные композиции, бесплатная доставка по Москве и МО, заказ через Telegram.">
+<title>LUME — премиальные букеты роз</title>
+<link rel="canonical" href="https://lume-flower.com/">
+<link rel="icon" type="image/png" href="assets/brand/lume-logo.png">
+<link rel="apple-touch-icon" href="assets/brand/lume-logo.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="LUME">
+<meta property="og:url" content="https://lume-flower.com/">
+<meta property="og:title" content="LUME — букеты из свежих роз">
+<meta property="og:description" content="Монобукеты из 101 розы, 60–100 см. Бесплатная доставка по Москве и МО, ежедневно 8:00–00:00. Заказ в Telegram.">
+<meta property="og:image" content="https://lume-flower.com/assets/brand/lume-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lume-flower.com/assets/brand/lume-og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap&amp;subset=cyrillic,latin" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; scroll-padding-top: 104px; }
+  body { margin: 0; background: #FDF6F0; color: #3D3436; font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: #B08F52; text-decoration: none; }
+  a:hover { color: #3D3436; }
+  :focus-visible { outline: 2px solid #B08F52; outline-offset: 3px; border-radius: 4px; }
+  @keyframes lumeRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  @keyframes lumeFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+  @media (max-width: 1060px) { [data-desktop] { display: none !important; } }
+  @media (min-width: 1061px) { [data-mobile] { display: none !important; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } }
+</style>
+<script src="./assets/three-bundle.js"></script>
+<script src="./lume-bouquet-model.js"></script>
+<script src="./lume-data.js"></script>
+<script src="./lume-scene.js"></script>
+</helmet>
+
+<x-import component-from-global-scope="lume-stage" anchor="#hero-3d" stop="#contacts" hint-size="0px,0px"></x-import>
+
+<div style="position: relative; z-index: 1; max-width: 100%;">
+
+  <header style="position: sticky; top: 0; z-index: 60; height: 80px; background: rgba(253, 246, 240, 0.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(201, 169, 110, 0.28);">
+    <div style="max-width: 1280px; margin: 0 auto; height: 80px; padding: 0 clamp(24px, 4vw, 48px); display: flex; align-items: center; gap: 28px;">
+      <a href="#hero" style="display: flex; align-items: center; gap: 10px; color: #3D3436;" aria-label="LUME — на главную">
+        
+        <span style="font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 22px; letter-spacing: 0.14em;">LUME</span>
+      </a>
+      <nav data-desktop="" style="margin-left: auto; display: flex; align-items: center; gap: 26px; white-space: nowrap;" aria-label="Разделы сайта">
+        <a href="#about" style="font-size: 14px; font-weight: 500; color: #3D3436; transition: color 0.3s ease;" style-hover="color: #B08F52;">О нас</a>
+        <a href="#catalog" style="font-size: 14px; font-weight: 500; color: #3D3436; transition: color 0.3s ease;" style-hover="color: #B08F52;">Каталог</a>
+        <a href="#how-to-order" style="font-size: 14px; font-weight: 500; color: #3D3436; transition: color 0.3s ease;" style-hover="color: #B08F52;">Как заказать</a>
+        <a href="#delivery" style="font-size: 14px; font-weight: 500; color: #3D3436; transition: color 0.3s ease;" style-hover="color: #B08F52;">Доставка</a>
+        <a href="#reviews" style="font-size: 14px; font-weight: 500; color: #3D3436; transition: color 0.3s ease;" style-hover="color: #B08F52;">Отзывы</a>
+        <a href="#contacts" style="font-size: 14px; font-weight: 500; color: #3D3436; transition: color 0.3s ease;" style-hover="color: #B08F52;">Контакты</a>
+      </nav>
+      <a data-desktop="" href="{{ tgLink }}" target="_blank" rel="noopener" style="padding: 12px 22px; border-radius: 999px; background: #3D3436; color: #FDF6F0; font-size: 14px; font-weight: 600; transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;" style-hover="background: #C9A96E; color: #3D3436; box-shadow: 0 14px 30px -12px rgba(201, 169, 110, 0.85);">Заказать в Telegram</a>
+      <button data-mobile="" type="button" onClick="{{ toggleMenu }}" ref="{{ burgerRef }}" aria-expanded="{{ menuOpen }}" aria-controls="lume-mobile-menu" aria-label="Меню" style="margin-left: auto; width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid rgba(61, 52, 54, 0.18); border-radius: 999px; background: transparent; cursor: pointer;">
+        <span style="display: block; width: 20px; height: 14px; position: relative;">
+          <span style="position: absolute; left: 0; width: 20px; height: 1.6px; background: #3D3436; transition: transform 0.2s ease, opacity 0.2s ease; top: {{ burgerTop }}; transform: {{ burgerTopT }};"></span>
+          <span style="position: absolute; left: 0; top: 6px; width: 20px; height: 1.6px; background: #3D3436; transition: opacity 0.2s ease; opacity: {{ burgerMidO }};"></span>
+          <span style="position: absolute; left: 0; width: 20px; height: 1.6px; background: #3D3436; transition: transform 0.2s ease; top: {{ burgerBot }}; transform: {{ burgerBotT }};"></span>
+        </span>
+      </button>
+    </div>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <div id="lume-mobile-menu" data-mobile="" ref="{{ menuRef }}" onKeyDown="{{ menuKeyDown }}" style="position: absolute; left: 0; right: 0; top: 80px; padding: 18px clamp(24px, 4vw, 48px) 26px; display: flex; flex-direction: column; gap: 4px; background: rgba(253, 246, 240, 0.97); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(201, 169, 110, 0.28); animation: lumeRise 0.2s ease-out both;">
+        <a href="#about" onClick="{{ closeMenu }}" style="padding: 13px 0; font-size: 16px; font-weight: 500; color: #3D3436; border-bottom: 1px solid rgba(201, 169, 110, 0.2);">О нас</a>
+        <a href="#catalog" onClick="{{ closeMenu }}" style="padding: 13px 0; font-size: 16px; font-weight: 500; color: #3D3436; border-bottom: 1px solid rgba(201, 169, 110, 0.2);">Каталог</a>
+        <a href="#how-to-order" onClick="{{ closeMenu }}" style="padding: 13px 0; font-size: 16px; font-weight: 500; color: #3D3436; border-bottom: 1px solid rgba(201, 169, 110, 0.2);">Как заказать</a>
+        <a href="#delivery" onClick="{{ closeMenu }}" style="padding: 13px 0; font-size: 16px; font-weight: 500; color: #3D3436; border-bottom: 1px solid rgba(201, 169, 110, 0.2);">Доставка</a>
+        <a href="#reviews" onClick="{{ closeMenu }}" style="padding: 13px 0; font-size: 16px; font-weight: 500; color: #3D3436; border-bottom: 1px solid rgba(201, 169, 110, 0.2);">Отзывы</a>
+        <a href="#contacts" onClick="{{ closeMenu }}" style="padding: 13px 0; font-size: 16px; font-weight: 500; color: #3D3436;">Контакты</a>
+        <a href="{{ tgLink }}" target="_blank" rel="noopener" style="margin-top: 12px; padding: 15px 22px; border-radius: 999px; background: #3D3436; color: #FDF6F0; font-size: 15px; font-weight: 600; text-align: center;">Заказать в Telegram</a>
+      </div>
+    </sc-if>
+  </header>
+
+  <section id="hero" style="position: relative; overflow: hidden; min-height: min(92vh, 900px); display: flex; align-items: center; padding: 56px 0 96px;">
+    <div aria-hidden="true" style="position: absolute; top: -80px; left: -120px; width: 420px; height: 420px; border-radius: 999px; background: #E8B4B8; opacity: 0.28; filter: blur(90px); pointer-events: none;"></div>
+    <div aria-hidden="true" style="position: absolute; bottom: 40px; right: -100px; width: 380px; height: 380px; border-radius: 999px; background: #C9A96E; opacity: 0.22; filter: blur(90px); pointer-events: none;"></div>
+    <div aria-hidden="true" style="position: absolute; left: 8%; top: 26%; width: 8px; height: 8px; border-radius: 999px; background: #E8B4B8; animation: lumeFloat 6.5s ease-in-out infinite;"></div>
+    <div aria-hidden="true" style="position: absolute; left: 22%; bottom: 22%; width: 5px; height: 5px; border-radius: 999px; background: #C9A96E; animation: lumeFloat 7.8s ease-in-out -1.2s infinite;"></div>
+    <div aria-hidden="true" style="position: absolute; right: 14%; top: 18%; width: 10px; height: 10px; border-radius: 999px; background: #F3D4D6; animation: lumeFloat 5.5s ease-in-out -2.4s infinite;"></div>
+    <div aria-hidden="true" style="position: absolute; right: 30%; bottom: 14%; width: 6px; height: 6px; border-radius: 999px; background: #DCC496; animation: lumeFloat 7.1s ease-in-out -3.6s infinite;"></div>
+
+    <div style="position: relative; width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 clamp(24px, 4vw, 48px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(430px, 100%), 1fr)); gap: clamp(40px, 5vw, 72px); align-items: center;">
+      <div style="display: flex; flex-direction: column; gap: 26px; animation: lumeRise 0.8s ease-out both;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span aria-hidden="true" style="display: block; width: 44px; height: 1px; background: #C9A96E;"></span>
+          <span style="font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #B08F52;">LUME · букеты из роз</span>
+        </div>
+        <h1 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: clamp(36px, 5.2vw, 60px); line-height: 1.1; letter-spacing: -0.01em; text-wrap: pretty;">Розы, которые говорят вместо слов</h1>
+        <p style="margin: 0; max-width: 30em; font-size: 16px; line-height: 1.7; color: rgba(61, 52, 54, 0.78); text-wrap: pretty;">Моно - и смешанные букеты из свежих роз — собираем бережно, доставляем бесплатно по Москве и МО и оформляем заказ прямо в Telegram, без лишних шагов.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px;">
+          <a href="#catalog" style="display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; border-radius: 999px; background: #3D3436; color: #FDF6F0; font-size: 15px; font-weight: 600; transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;" style-hover="background: #C9A96E; color: #3D3436; box-shadow: 0 18px 34px -14px rgba(201, 169, 110, 0.9);">Смотреть каталог <span aria-hidden="true" style="transition: transform 0.3s ease;">→</span></a>
+          <a href="{{ tgLink }}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; padding: 16px 28px; border-radius: 999px; border: 1px solid rgba(61, 52, 54, 0.28); color: #3D3436; font-size: 15px; font-weight: 600; transition: border-color 0.3s ease, color 0.3s ease;" style-hover="border-color: #C9A96E; color: #B08F52;">Заказать в Telegram</a>
+        </div>
+        <p style="margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: rgba(61, 52, 54, 0.55);">Бесплатная доставка по Москве и МО · ежедневно 8:00–00:00</p>
+      </div>
+
+      <div id="hero-3d" role="img" aria-label="Букет красных роз, перевязанный золотой атласной лентой" style="position: relative; min-height: clamp(380px, 54vh, 640px); border-radius: 32px;">
+        <div data-lume-skeleton="" style="position: absolute; inset: 0; border-radius: 32px; background: radial-gradient(58% 52% at 52% 44%, rgba(179, 57, 81, 0.2), rgba(232, 180, 184, 0.18) 55%, rgba(253, 246, 240, 0) 78%), linear-gradient(160deg, #F3D4D6 0%, #FDF6F0 52%, #DCC496 100%); transition: opacity 0.8s ease; left: -2px; top: -2px"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" style="padding: clamp(96px, 10vw, 128px) 0;">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(24px, 4vw, 48px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: clamp(40px, 5vw, 80px);">
+      <div data-reveal="" style="display: flex; flex-direction: column; gap: 22px;">
+        <span style="font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #B08F52;">О нас</span>
+        <h2 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(30px, 3.4vw, 36px); line-height: 1.25; text-wrap: pretty;">Букеты, которые хочется держать в руках</h2>
+        <p style="margin: 0; max-width: 34em; font-size: 16px; line-height: 1.7; color: rgba(61, 52, 54, 0.78); text-wrap: pretty;">LUME — небольшая мастерская букетов, где розы — главные и единственные герои. Мы не гонимся за количеством видов цветов в букете: вместо этого уделяем время форме, свежести и деталям, которые обычно остаются незамеченными — но именно из них складывается ощущение «дорого и со вкусом».</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 32px 40px; align-content: start;">
+        <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 22px; border-top: 1px solid #C9A96E;">
+          <h3 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 20px;">Только свежие розы</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(61, 52, 54, 0.7);">Закупаем цветы под заказ — букет собирается только из свежих роз.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 22px; border-top: 1px solid #C9A96E;">
+          <h3 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 20px;">Без шаблонов</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(61, 52, 54, 0.7);">Каждый букет собирается вручную, с вниманием к форме и балансу — не по одному лекалу на все случаи.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 22px; border-top: 1px solid #C9A96E;">
+          <h3 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 20px;">Просто и быстро</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(61, 52, 54, 0.7);">Заказ — в одном сообщении в Telegram. Никаких личных кабинетов и лишних форм.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalog" style="padding: clamp(96px, 10vw, 128px) 0;">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(24px, 4vw, 48px);">
+      <div data-reveal="" style="display: flex; flex-direction: column; gap: 20px; max-width: 44em;">
+        <span style="font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #B08F52;">Каталог</span>
+        <h2 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(30px, 3.4vw, 36px); line-height: 1.25;">Розы на любой повод</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.7; color: rgba(61, 52, 54, 0.75); text-wrap: pretty;">Ассортимент пополняется — если не нашли подходящий букет, просто напишите нам в Telegram, соберём индивидуально.</p>
+      </div>
+
+      <div role="group" aria-label="Фильтр каталога по тегам" style="margin: 40px 0 44px; display: flex; flex-wrap: wrap; gap: 10px;">
+        <sc-for list="{{ chips }}" as="chip" hint-placeholder-count="4">
+          <button type="button" onClick="{{ chip.select }}" aria-pressed="{{ chip.active }}" style="padding: 10px 20px; border-radius: 999px; font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease; background: {{ chip.bg }}; color: {{ chip.fg }}; border: 1px solid {{ chip.border }};">{{ chip.label }}</button>
+        </sc-for>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: clamp(20px, 2.4vw, 32px);">
+        <sc-for list="{{ items }}" as="item" hint-placeholder-count="2">
+          <article style="display: flex; flex-direction: column; border-radius: 24px; background: rgba(255, 255, 255, 0.55); border: 1px solid rgba(201, 169, 110, 0.24); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;" style-hover="transform: translateY(-6px); box-shadow: 0 26px 48px -24px rgba(216, 149, 153, 0.75);">
+            <div style="position: relative; aspect-ratio: 1 / 1; overflow: hidden; display: grid; place-items: center; background: linear-gradient(150deg, #F3D4D6 0%, #FDF6F0 52%, #DCC496 100%);">
+              <sc-if value="{{ item.hasImage }}" hint-placeholder-val="{{ true }}">
+                <img src="{{ item.image }}" alt="{{ item.alt }}" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;">
+              </sc-if>
+              <sc-if value="{{ item.noImage }}" hint-placeholder-val="{{ false }}">
+                <svg width="86" height="86" viewBox="0 0 32 32" aria-hidden="true" style="opacity: 0.5;"><circle cx="13" cy="14" r="8" fill="#E8B4B8"></circle><circle cx="20" cy="17" r="7.5" fill="#C9A96E" fill-opacity="0.72"></circle><circle cx="16.5" cy="15.5" r="3.2" fill="#FDF6F0"></circle></svg>
+              </sc-if>
+              <sc-if value="{{ item.preorder }}" hint-placeholder-val="{{ false }}">
+                <span style="position: absolute; top: 16px; left: 16px; padding: 7px 14px; border-radius: 999px; background: #E8B4B8; color: #3D3436; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">Под заказ</span>
+              </sc-if>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px; padding: 24px 24px 26px;">
+              <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #B08F52;">{{ item.category }}</span>
+              <h3 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 22px;">{{ item.name }}</h3>
+              <p style="margin: 0; font-size: 14px; line-height: 1.6; color: rgba(61, 52, 54, 0.7);">{{ item.description }}</p>
+              <div style="margin-top: 10px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+                <span style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 24px;">{{ item.priceLabel }}</span>
+                <a href="{{ item.href }}" target="_blank" rel="noopener" style="padding: 12px 22px; border-radius: 999px; background: #3D3436; color: #FDF6F0; font-size: 14px; font-weight: 600; transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;" style-hover="background: #C9A96E; color: #3D3436; box-shadow: 0 14px 28px -12px rgba(201, 169, 110, 0.9);">Заказать</a>
+              </div>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-to-order" style="padding: clamp(96px, 10vw, 128px) 0;">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(24px, 4vw, 48px);">
+      <div data-reveal="" style="display: flex; flex-direction: column; gap: 18px;">
+        <span style="font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #B08F52;">Как заказать</span>
+        <h2 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(30px, 3.4vw, 36px); line-height: 1.25;">Три шага до букета</h2>
+      </div>
+      <div style="margin-top: 52px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: clamp(28px, 3vw, 48px);">
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <span style="font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 44px; line-height: 1; color: #D89599;">01</span>
+          <h3 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 20px;">Выбрали</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(61, 52, 54, 0.7);">Смотрите каталог и выбираете букет — или пишете нам, что хотите, если готового варианта нет.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <span style="font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 44px; line-height: 1; color: #D89599;">02</span>
+          <h3 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 20px;">Написали</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(61, 52, 54, 0.7);">Отправляете название букета и адрес в Telegram — без звонков и форм на сайте.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <span style="font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 44px; line-height: 1; color: #D89599;">03</span>
+          <h3 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 20px;">Доставили</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(61, 52, 54, 0.7);">Собираем букет из свежих роз и бесплатно привозим по Москве и МО к назначенному времени.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="delivery" style="padding: clamp(96px, 10vw, 128px) 0;">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(24px, 4vw, 48px);">
+      <div data-reveal="" style="display: flex; flex-direction: column; gap: 18px;">
+        <span style="font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #B08F52;">Доставка и оплата</span>
+        <h2 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(30px, 3.4vw, 36px); line-height: 1.25;">Довезём бережно и вовремя</h2>
+      </div>
+      <div style="margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: clamp(20px, 2.4vw, 28px);">
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: 32px; border-radius: 24px; background: rgba(255, 255, 255, 0.6); border: 1px solid #C9A96E;">
+          <h3 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 20px;">Доставка</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(61, 52, 54, 0.72);">Бесплатно по Москве и МО, ежедневно с 8:00 до 00:00. Точное время доставки согласуем в Telegram.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: 32px; border-radius: 24px; background: rgba(255, 255, 255, 0.6); border: 1px solid #C9A96E;">
+          <h3 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 20px;">Оплата</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(61, 52, 54, 0.72);">Наличными и переводом, все для ваших удобств можно обсудить с нашими менеджерами!</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: 32px; border-radius: 24px; background: rgba(255, 255, 255, 0.6); border: 1px solid #C9A96E;">
+          <h3 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 20px;">Сроки</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(61, 52, 54, 0.72);">Собираем и доставляем в день заказа при заказе в рабочие часы — уточняем точное время при оформлении.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ reviewsOn }}" hint-placeholder-val="{{ true }}">
+    <section id="reviews" style="padding: clamp(96px, 10vw, 128px) 0;">
+      <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(24px, 4vw, 48px);">
+        <div data-reveal="" style="display: flex; flex-direction: column; gap: 18px;">
+          <span style="font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #B08F52;">Отзывы</span>
+          <h2 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(30px, 3.4vw, 36px); line-height: 1.25;">Что говорят клиенты</h2>
+        </div>
+        <div style="margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: clamp(20px, 2.4vw, 28px);">
+          <sc-for list="{{ reviews }}" as="review" hint-placeholder-count="3">
+            <figure style="margin: 0; display: flex; flex-direction: column; gap: 16px; padding: 32px; border-radius: 24px; background: rgba(232, 180, 184, 0.16);">
+              <div aria-label="{{ review.ratingLabel }}" style="display: flex; gap: 4px;">
+                <sc-for list="{{ review.stars }}" as="star" hint-placeholder-count="5">
+                  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="{{ star.color }}"></circle></svg>
+                </sc-for>
+              </div>
+              <blockquote style="margin: 0; font-size: 15px; line-height: 1.7; color: rgba(61, 52, 54, 0.82); text-wrap: pretty;">{{ review.text }}</blockquote>
+              <figcaption style="font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: #B08F52;">{{ review.name }}</figcaption>
+            </figure>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <section id="contacts" style="position: relative; z-index: 2; background: #3D3436; color: #FDF6F0; padding: clamp(96px, 10vw, 128px) 0 0;">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(24px, 4vw, 48px);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr)); gap: clamp(32px, 4vw, 64px); align-items: center;">
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <span style="font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #C9A96E;">Контакты</span>
+          <h2 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(30px, 3.4vw, 36px); line-height: 1.25;">Напишите нам — ответим быстро</h2>
+          <p style="margin: 0; max-width: 32em; font-size: 16px; line-height: 1.7; color: rgba(253, 246, 240, 0.76); text-wrap: pretty;">Работаем ежедневно с 8:00 до 00:00. Telegram — самый быстрый способ связи: там же согласуем букет, адрес и время доставки.</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-start;">
+          <a href="{{ tgLink }}" target="_blank" rel="noopener" style="padding: 16px 28px; border-radius: 999px; background: #E8B4B8; color: #3D3436; font-size: 15px; font-weight: 600; transition: background 0.3s ease, box-shadow 0.3s ease;" style-hover="background: #C9A96E; box-shadow: 0 18px 34px -14px rgba(201, 169, 110, 0.7);">Telegram · {{ tgHandle }}</a>
+          <a href="tel:+79951544202" style="padding: 16px 28px; border-radius: 999px; border: 1px solid rgba(253, 246, 240, 0.35); color: #FDF6F0; font-size: 15px; font-weight: 600; transition: border-color 0.3s ease, color 0.3s ease;" style-hover="border-color: #C9A96E; color: #C9A96E;">+7 995 154-42-02</a>
+        </div>
+      </div>
+      <footer style="margin-top: clamp(64px, 7vw, 96px); padding: 28px 0 36px; border-top: 1px solid rgba(253, 246, 240, 0.16); display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          
+          <span style="font-family: 'Playfair Display', Georgia, serif; font-size: 15px; letter-spacing: 0.06em;">LUME · букеты из роз</span>
+        </div>
+        <span style="font-size: 13px; color: rgba(253, 246, 240, 0.55);">© {{ year }} LUME</span>
+      </footer>
+    </div>
+  </section>
+</div>
+
+<a data-mobile="" href="{{ tgLink }}" target="_blank" rel="noopener" style="position: fixed; left: 16px; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 70; padding: 17px 24px; border-radius: 999px; background: #3D3436; color: #FDF6F0; font-size: 15px; font-weight: 600; text-align: center; box-shadow: 0 20px 40px -18px rgba(61, 52, 54, 0.8); transition: opacity 0.3s ease, transform 0.3s ease; opacity: {{ fabOpacity }}; transform: {{ fabTransform }}; pointer-events: {{ fabEvents }};">Заказать в Telegram</a>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;telegramHandle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;@lume_flower&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Контакты&quot;},&quot;showReviews&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Секции&quot;}}">
+class Component extends DCLogic {
+  state = { products: [], reviews: [], filter: 'Все', menuOpen: false, fab: false };
+
+  constructor(props) {
+    super(props);
+    this.burgerRef = React.createRef();
+    this.menuRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.pickUpData(0);
+
+    this._onScroll = () => {
+      const show = window.scrollY > window.innerHeight * 0.85;
+      if (show !== this.state.fab) this.setState({ fab: show });
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    requestAnimationFrame(() => this.reveal());
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    clearTimeout(this._dataTimer);
+  }
+
+  // lume-data.js подключён скриптом в helmet; ждём, пока он выполнится
+  pickUpData(tries) {
+    const d = window.LUME_DATA;
+    if (d) {
+      this.setState({ products: d.products || [], reviews: d.reviews || [] });
+      return;
+    }
+    if (tries > 60) return;
+    this._dataTimer = setTimeout(() => this.pickUpData(tries + 1), 50);
+  }
+
+  componentDidUpdate(_p, prev) {
+    if (this.state.menuOpen && !prev.menuOpen && this.menuRef.current) {
+      const first = this.menuRef.current.querySelector('a, button');
+      if (first) first.focus();
+    }
+  }
+
+  reveal() {
+    let reduce = false;
+    try { reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    if (reduce || !('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'none';
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('[data-reveal]').forEach((el) => {
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.88) return;
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.7s ease-out, transform 0.7s ease-out';
+      io.observe(el);
+    });
+  }
+
+  menuKeyDown = (e) => {
+    if (e.key === 'Escape') {
+      e.stopPropagation();
+      this.setState({ menuOpen: false }, () => {
+        if (this.burgerRef.current) this.burgerRef.current.focus();
+      });
+      return;
+    }
+    if (e.key !== 'Tab' || !this.menuRef.current) return;
+    const items = Array.from(this.menuRef.current.querySelectorAll('a, button'));
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  };
+
+  price(v) {
+    return String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '\u2009') + ' \u20BD';
+  }
+
+  renderVals() {
+    const handle = this.props.telegramHandle ?? '@privalov_p_s';
+    const user = handle.replace(/^@/, '');
+    const tgLink = 'https://t.me/' + user;
+    const filter = this.state.filter;
+
+    const tags = [];
+    this.state.products.forEach((p) => (p.tags || []).forEach((t) => { if (!tags.includes(t)) tags.push(t); }));
+    const chips = ['Все'].concat(tags).map((label) => {
+      const active = label === filter;
+      return {
+        label,
+        active,
+        bg: active ? '#3D3436' : 'transparent',
+        fg: active ? '#FDF6F0' : '#3D3436',
+        border: active ? '#3D3436' : 'rgba(61,52,54,0.24)',
+        select: () => this.setState({ filter: label })
+      };
+    });
+
+    const items = this.state.products
+      .filter((p) => filter === 'Все' || (p.tags || []).includes(filter))
+      .map((p) => {
+        const priceLabel = p.price > 0 ? this.price(p.price) : 'Цена по запросу';
+        const msg = 'Здравствуйте! Хочу заказать: «' + p.name + '»' + (p.price > 0 ? ' (' + priceLabel + ')' : '');
+        return {
+          id: p.id,
+          name: p.name,
+          category: p.category,
+          description: p.description || '',
+          hasDescription: !!p.description,
+          priceLabel,
+          image: (p.images || [])[0] || '',
+          hasImage: !!(p.images || [])[0],
+          noImage: !(p.images || [])[0],
+          alt: p.name,
+          preorder: p.inStock === false,
+          href: tgLink + '?text=' + encodeURIComponent(msg)
+        };
+      });
+
+    const reviews = this.state.reviews.map((r) => ({
+      name: r.name,
+      text: r.text,
+      ratingLabel: 'Оценка: ' + r.rating + ' из 5',
+      stars: [0, 1, 2, 3, 4].map((i) => ({ color: i < r.rating ? '#C9A96E' : 'rgba(61,52,54,0.18)' }))
+    }));
+
+    const open = this.state.menuOpen;
+    return {
+      tgLink,
+      tgHandle: handle,
+      year: new Date().getFullYear(),
+      reviewsOn: (this.props.showReviews ?? true) && reviews.length > 0,
+      chips,
+      items,
+      reviews,
+      menuOpen: open,
+      burgerRef: this.burgerRef,
+      menuRef: this.menuRef,
+      menuKeyDown: this.menuKeyDown,
+      toggleMenu: () => this.setState((s) => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      burgerTop: open ? '6px' : '0px',
+      burgerTopT: open ? 'rotate(45deg)' : 'none',
+      burgerBot: open ? '6px' : '12px',
+      burgerBotT: open ? 'rotate(-45deg)' : 'none',
+      burgerMidO: open ? '0' : '1',
+      fabOpacity: this.state.fab ? '1' : '0',
+      fabTransform: this.state.fab ? 'translateY(0)' : 'translateY(20px)',
+      fabEvents: this.state.fab ? 'auto' : 'none'
+    };
+  }
+}
+
+</script>
+</body>
+</html>
